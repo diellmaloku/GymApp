@@ -25,6 +25,7 @@ public class UserService {
 
     public User createUser(User user, Long staffId) {
         Optional<Staff> optionalStaff = staffRepository.findById(staffId);
+
         if(optionalStaff.isPresent()){
             Staff staff = optionalStaff.get();
             staff.setRegisteredUsers(user);
