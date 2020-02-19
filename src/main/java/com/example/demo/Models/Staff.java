@@ -1,10 +1,9 @@
 package com.example.demo.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "Staff")
 public class Staff {
@@ -19,6 +18,13 @@ public class Staff {
     private int identification;
     private String password;
 
+    @ManyToMany
+    @JoinTable(
+            name = "staff_user",
+            joinColumns = {@JoinColumn(name = "staff_id", referencedColumnName = "staffId")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "userId")})
+    Set<User> likedCourses = new HashSet<>();
+
     protected Staff() {}
 
     public Staff(String firstName, String lastName, Date bornDate, int identification, String password) {
@@ -27,6 +33,14 @@ public class Staff {
         this.bornDate = bornDate;
         this.identification = identification;
         this.password = password;
+    }
+
+    public Set<User> getLikedCourses() {
+        return likedCourses;
+    }
+
+    public void setLikedCourses(Set<User> likedCourses) {
+        this.likedCourses = likedCourses;
     }
 
     public Staff(Long staffId, String firstName, String lastName, Date bornDate, int identification, String password) {

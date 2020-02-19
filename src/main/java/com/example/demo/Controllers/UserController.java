@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -16,9 +17,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/user")
-    public ResponseEntity<User> createUser(@RequestBody User user)   {
-        userService.createUser(user);
+    @PostMapping("/user/{staffId}")
+    public ResponseEntity<User> createUser(@RequestBody User user, @PathVariable Long staffId)   {
+        userService.createUser(user, staffId);
         return ResponseEntity.ok().body(user);
     }
 
@@ -26,5 +27,11 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable Long id)   {
         userService.deleteUser(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/users/get")
+    public ResponseEntity<Iterable<User>> getAllUsers() {
+        Iterable<User> list = userService.getAllUsers();
+        return ResponseEntity.ok().body(list);
     }
 }
