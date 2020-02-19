@@ -24,12 +24,18 @@ public class UserService {
     }
 
     public User createUser(User user, Long staffId) {
-        Optional<Staff> staff = staffRepository.findById(staffId);
-        Set<User> newUser = new HashSet<>();
-        newUser.add(user);
-        staff.get().setLikedCourses(newUser);
-        staffRepository.save(staff.get());
-        return userRepository.save(user);
+        Optional<Staff> optionalStaff = staffRepository.findById(staffId);
+        if(optionalStaff.isPresent()){
+            Staff staff = optionalStaff.get();
+            staff.setRegisteredUsers(user);
+            userRepository.save(user);
+            staffRepository.save(staff);
+
+            return  user;
+        }
+        else{
+            throw new RuntimeException("Staff with id"+ staffId+" does not exist");
+        }
     }
 
     public void deleteUser(Long id) {

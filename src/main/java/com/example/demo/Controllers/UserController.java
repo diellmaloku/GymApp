@@ -29,7 +29,7 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/users/get")
+    @GetMapping("/users")
     public ResponseEntity<Iterable<User>> getAllUsers() {
         Iterable<User> list = userService.getAllUsers();
         return ResponseEntity.ok().body(list);

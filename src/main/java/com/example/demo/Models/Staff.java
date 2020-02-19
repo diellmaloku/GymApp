@@ -23,7 +23,7 @@ public class Staff {
             name = "staff_user",
             joinColumns = {@JoinColumn(name = "staff_id", referencedColumnName = "staffId")},
             inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "userId")})
-    Set<User> likedCourses = new HashSet<>();
+    Set<User> registeredUsers = new HashSet<>();
 
     protected Staff() {}
 
@@ -33,14 +33,6 @@ public class Staff {
         this.bornDate = bornDate;
         this.identification = identification;
         this.password = password;
-    }
-
-    public Set<User> getLikedCourses() {
-        return likedCourses;
-    }
-
-    public void setLikedCourses(Set<User> likedCourses) {
-        this.likedCourses = likedCourses;
     }
 
     public Staff(Long staffId, String firstName, String lastName, Date bornDate, int identification, String password) {
@@ -98,5 +90,13 @@ public class Staff {
 
     public String getPassword() {
         return password;
+    }
+
+    public Set<User> getRegisteredUsers() {
+        return registeredUsers;
+    }
+
+    public void setRegisteredUsers(User registeredUser) {
+        this.registeredUsers.add(registeredUser);
     }
 }
