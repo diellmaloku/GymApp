@@ -1,9 +1,13 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.Models.Staff;
+import com.example.demo.Models.User;
 import com.example.demo.Services.StaffService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+import java.util.Set;
 
 @RestController
 public class StaffController {
@@ -30,5 +34,17 @@ public class StaffController {
     public ResponseEntity<Iterable<Staff>> getAllStaff()    {
         Iterable<Staff> list = staffService.getAllStaff();
         return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping("/staff/{id}")
+    public ResponseEntity<Optional<Staff>> getStaffById(@PathVariable Long id)  {
+        Optional<Staff> staff = staffService.getStaffById(id);
+        return ResponseEntity.ok().body(staff);
+    }
+
+    @GetMapping("/staff/{id}/users")
+    public ResponseEntity<Set<User>> getUsersByStaffId(@PathVariable Long id)    {
+        Set<User> userSet = staffService.getUsersByStaffId(id);
+        return ResponseEntity.ok().body(userSet);
     }
 }

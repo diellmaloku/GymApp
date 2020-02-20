@@ -35,7 +35,7 @@ public class UserService {
             return  user;
         }
         else{
-            throw new RuntimeException("Staff with id"+ staffId+" does not exist");
+            throw new RuntimeException("Staff with id " + staffId + " does not exist");
         }
     }
 
@@ -46,4 +46,9 @@ public class UserService {
     public Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
+
+    public Optional<User> getUserById(Long id)    {
+        return userRepository.findById(id);
+    }
+
 }

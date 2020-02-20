@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -33,5 +34,11 @@ public class UserController {
     public ResponseEntity<Iterable<User>> getAllUsers() {
         Iterable<User> list = userService.getAllUsers();
         return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<Optional<User>> getUserById(@PathVariable Long id)  {
+        Optional<User> user = userService.getUserById(id);
+        return ResponseEntity.ok().body(user);
     }
 }

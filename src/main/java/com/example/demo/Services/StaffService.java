@@ -1,9 +1,13 @@
 package com.example.demo.Services;
 
 import com.example.demo.Models.Staff;
+import com.example.demo.Models.User;
 import com.example.demo.Repositories.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class StaffService {
@@ -27,4 +31,19 @@ public class StaffService {
         return staffRepository.findAll();
     }
 
+    public Optional<Staff> getStaffById(Long id)  {
+        return staffRepository.findById(id);
+    }
+
+    public Set<User> getUsersByStaffId(Long id)  {
+        Optional<Staff> optionalStaff = staffRepository.findById(id);
+        if (optionalStaff.isPresent())  {
+            Staff staff = optionalStaff.get();
+            Set<User> userSet = staff.getRegisteredUsers();
+            return userSet;
+        }
+        else {
+            throw new RuntimeException("Staff with id " + id + "does not exist");
+        }
+    }
 }
