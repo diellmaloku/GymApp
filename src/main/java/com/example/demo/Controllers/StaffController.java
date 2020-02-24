@@ -37,8 +37,8 @@ public class StaffController {
     }
 
     @GetMapping("/staff/{id}")
-    public ResponseEntity<Optional<Staff>> getStaffById(@PathVariable Long id)  {
-        Optional<Staff> staff = staffService.getStaffById(id);
+    public ResponseEntity<Staff> getStaffById(@PathVariable Long id)  {
+        Staff staff = staffService.getStaffById(id);
         return ResponseEntity.ok().body(staff);
     }
 

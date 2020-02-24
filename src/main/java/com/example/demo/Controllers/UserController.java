@@ -37,8 +37,8 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<Optional<User>> getUserById(@PathVariable Long id)  {
-        Optional<User> user = userService.getUserById(id);
+    public ResponseEntity<User> getUserById(@PathVariable Long id)  {
+        User user = userService.getUserById(id);
         return ResponseEntity.ok().body(user);
     }
 }

@@ -47,10 +47,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> getUserById(Long id)    {
+    public User getUserById(Long id)    {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent())   {
-            return userRepository.findById(id);
+            return optionalUser.get();
         }
         else {
             throw new RuntimeException("User with id " + id + " does not exist");

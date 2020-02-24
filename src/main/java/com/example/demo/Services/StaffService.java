@@ -31,10 +31,10 @@ public class StaffService {
         return staffRepository.findAll();
     }
 
-    public Optional<Staff> getStaffById(Long id)  {
+    public Staff getStaffById(Long id)  {
         Optional<Staff> optionalStaff = staffRepository.findById(id);
         if (optionalStaff.isPresent()) {
-            return staffRepository.findById(id);
+            return optionalStaff.get();
         }
         else {
             throw new RuntimeException("Staff with id " + id + " does not exist");
