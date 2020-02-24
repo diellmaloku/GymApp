@@ -32,7 +32,13 @@ public class StaffService {
     }
 
     public Optional<Staff> getStaffById(Long id)  {
-        return staffRepository.findById(id);
+        Optional<Staff> optionalStaff = staffRepository.findById(id);
+        if (optionalStaff.isPresent()) {
+            return staffRepository.findById(id);
+        }
+        else {
+            throw new RuntimeException("Staff with id " + id + " does not exist");
+        }
     }
 
     public Set<User> getUsersByStaffId(Long id)  {

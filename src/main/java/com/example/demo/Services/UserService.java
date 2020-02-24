@@ -48,7 +48,13 @@ public class UserService {
     }
 
     public Optional<User> getUserById(Long id)    {
-        return userRepository.findById(id);
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent())   {
+            return userRepository.findById(id);
+        }
+        else {
+            throw new RuntimeException("User with id " + id + " does not exist");
+        }
     }
 
 }
