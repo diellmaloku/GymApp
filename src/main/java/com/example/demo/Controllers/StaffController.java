@@ -30,7 +30,7 @@ public class StaffController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/staff/get")
+    @GetMapping("/staff")
     public ResponseEntity<Iterable<Staff>> getAllStaff()    {
         Iterable<Staff> list = staffService.getAllStaff();
         return ResponseEntity.ok().body(list);

@@ -18,13 +18,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/user/{staffId}")
+    @PostMapping("/users/{staffId}")
     public ResponseEntity<User> createUser(@RequestBody User user, @PathVariable Long staffId)   {
         userService.createUser(user, staffId);
         return ResponseEntity.ok().body(user);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/users/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id)   {
         userService.deleteUser(id);
         return ResponseEntity.ok().build();
@@ -36,7 +36,7 @@ public class UserController {
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id)  {
         User user = userService.getUserById(id);
         return ResponseEntity.ok().body(user);
