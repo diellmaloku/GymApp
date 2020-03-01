@@ -4,12 +4,11 @@ import com.example.demo.Models.Staff;
 import com.example.demo.Models.User;
 import com.example.demo.Repositories.StaffRepository;
 import com.example.demo.Repositories.UserRepository;
+import com.example.demo.dto.UserStaffDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class UserService {

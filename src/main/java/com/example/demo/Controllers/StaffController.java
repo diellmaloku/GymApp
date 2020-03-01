@@ -3,10 +3,10 @@ package com.example.demo.Controllers;
 import com.example.demo.Models.Staff;
 import com.example.demo.Models.User;
 import com.example.demo.Services.StaffService;
+import com.example.demo.dto.UserStaffDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -24,13 +24,13 @@ public class StaffController {
         return ResponseEntity.ok().body(staff);
     }
 
-    @DeleteMapping("/staff/delete/{id}")
+    @DeleteMapping("/staff/{id}")
     public ResponseEntity<Void> deleteStaff(@PathVariable Long id)  {
         staffService.deleteStaff(id);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/staff/get")
+    @GetMapping("/staff")
     public ResponseEntity<Iterable<Staff>> getAllStaff()    {
         Iterable<Staff> list = staffService.getAllStaff();
         return ResponseEntity.ok().body(list);
@@ -46,5 +46,11 @@ public class StaffController {
     public ResponseEntity<Set<User>> getUsersByStaffId(@PathVariable Long id)    {
         Set<User> userSet = staffService.getUsersByStaffId(id);
         return ResponseEntity.ok().body(userSet);
+    }
+
+    @GetMapping("/staff/{sId}/user/{uId}/userdto")
+    public ResponseEntity<UserStaffDTO> getUserDto(@PathVariable Long sId, @PathVariable Long uId)  {
+        UserStaffDTO userStaffDTO = staffService.getUserStaffDto(sId, uId);
+        return ResponseEntity.ok().body(userStaffDTO);
     }
 }

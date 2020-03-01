@@ -3,6 +3,7 @@ package com.example.demo.Services;
 import com.example.demo.Models.Staff;
 import com.example.demo.Models.User;
 import com.example.demo.Repositories.StaffRepository;
+import com.example.demo.dto.UserStaffDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +52,21 @@ public class StaffService {
         else {
             throw new RuntimeException("Staff with id " + id + "does not exist");
         }
+    }
+
+    public UserStaffDTO getUserStaffDto(Long sId, Long uId) {
+        Optional<Staff> optionalStaff = staffRepository.findById(sId);
+        if (optionalStaff.isPresent())  {
+            for (User user : optionalStaff.get().getRegisteredUsers())  {
+                if (user.getUserId() == uId)    {
+                    UserStaffDTO userStaffDTO = new UserStaffDTO(user.getFirstName(), user.getLastName(), optionalStaff.get().getFirstName());
+                    return userStaffDTO;
+                }
+            }
+        }
+        else {
+            throw new RuntimeException("Staff with id " + sId + "does not exist");
+        }
+        return null;
     }
 }
