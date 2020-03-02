@@ -18,12 +18,12 @@ public class Staff {
     private int identification;
     private String password;
 
-    @ManyToMany
-    @JoinTable(
-            name = "staff_user",
-            joinColumns = {@JoinColumn(name = "staff_id", referencedColumnName = "staffId")},
-            inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "userId")})
-    Set<User> registeredUsers = new HashSet<>();
+//    @ManyToMany
+//    @JoinTable(
+//            name = "staff_user",
+//            joinColumns = {@JoinColumn(name = "staff_id", referencedColumnName = "staffId")},
+//            inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "userId")})
+//    Set<User> registeredUsers = new HashSet<>();
 
     protected Staff() {}
 
@@ -92,11 +92,11 @@ public class Staff {
         return password;
     }
 
-    public Set<User> getRegisteredUsers() {
-        return registeredUsers;
-    }
-
-    public void setRegisteredUsers(User registeredUser) {
-        this.registeredUsers.add(registeredUser);
-    }
+//    public Set<User> getRegisteredUsers() {
+//        return registeredUsers;
+//    }
+//
+//    public void setRegisteredUsers(User registeredUser) {
+//        this.registeredUsers.add(registeredUser);
+//    }
 }

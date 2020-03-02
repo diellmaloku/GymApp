@@ -45,9 +45,9 @@ public class StaffService {
     public Set<User> getUsersByStaffId(Long id)  {
         Optional<Staff> optionalStaff = staffRepository.findById(id);
         if (optionalStaff.isPresent())  {
-            Staff staff = optionalStaff.get();
-            Set<User> userSet = staff.getRegisteredUsers();
-            return userSet;
+//            Staff staff = optionalStaff.get();
+//            Set<User> userSet = staff.getRegisteredUsers();
+            return null;
         }
         else {
             throw new RuntimeException("Staff with id " + id + "does not exist");
@@ -57,12 +57,12 @@ public class StaffService {
     public UserStaffDTO getUserStaffDto(Long sId, Long uId) {
         Optional<Staff> optionalStaff = staffRepository.findById(sId);
         if (optionalStaff.isPresent())  {
-            for (User user : optionalStaff.get().getRegisteredUsers())  {
-                if (user.getUserId() == uId)    {
-                    UserStaffDTO userStaffDTO = new UserStaffDTO(user.getFirstName(), user.getLastName(), optionalStaff.get().getFirstName());
-                    return userStaffDTO;
-                }
-            }
+//            for (User user : optionalStaff.get().getRegisteredUsers())  {
+//                if (user.getUserId() == uId)    {
+//                    UserStaffDTO userStaffDTO = new UserStaffDTO(user.getFirstName(), user.getLastName(), optionalStaff.get().getFirstName());
+//                    return userStaffDTO;
+//                }
+//            }
         }
         else {
             throw new RuntimeException("Staff with id " + sId + "does not exist");
