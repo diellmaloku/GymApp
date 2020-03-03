@@ -8,5 +8,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface StaffUserRepository extends CrudRepository<StaffUser, Long> {
-    public List<User> findAllByStaff(Staff staff);
+    public List<User> findAllUsersByStaff_staffId(Long id);
 }

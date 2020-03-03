@@ -3,10 +3,13 @@ package com.example.demo.Services;
 import com.example.demo.Models.Staff;
 import com.example.demo.Models.User;
 import com.example.demo.Repositories.StaffRepository;
+import com.example.demo.Repositories.StaffUserRepository;
 import com.example.demo.dto.UserStaffDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -14,10 +17,12 @@ import java.util.Set;
 public class StaffService {
 
     private final StaffRepository staffRepository;
+    private final StaffUserRepository staffUserRepository;
 
     @Autowired
-    public StaffService(StaffRepository staffRepository)    {
+    public StaffService(StaffRepository staffRepository, StaffUserRepository staffUserRepository)    {
         this.staffRepository = staffRepository;
+        this.staffUserRepository = staffUserRepository;
     }
 
     public Staff createStaff(Staff staff)   {
@@ -42,11 +47,11 @@ public class StaffService {
         }
     }
 
-    public Set<User> getUsersByStaffId(Long id)  {
+    public List<User> getUsersByStaffId(Long id)  {
         Optional<Staff> optionalStaff = staffRepository.findById(id);
+        List<User> userList = new LinkedList<>();
         if (optionalStaff.isPresent())  {
-//            Staff staff = optionalStaff.get();
-//            Set<User> userSet = staff.getRegisteredUsers();
+            staffUserRepository.findAllUsersByStaff_staffId(id);
             return null;
         }
         else {

@@ -7,6 +7,7 @@ import com.example.demo.dto.UserStaffDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -43,8 +44,8 @@ public class StaffController {
     }
 
     @GetMapping("/staff/{id}/users")
-    public ResponseEntity<Set<User>> getUsersByStaffId(@PathVariable Long id)    {
-        Set<User> userSet = staffService.getUsersByStaffId(id);
+    public ResponseEntity<List<User>> getUsersByStaffId(@PathVariable Long id)    {
+        List<User> userSet = staffService.getUsersByStaffId(id);
         return ResponseEntity.ok().body(userSet);
     }
 
