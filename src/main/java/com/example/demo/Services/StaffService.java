@@ -33,6 +33,24 @@ public class StaffService {
         staffRepository.deleteById(id);
     }
 
+
+    public Staff updateStaff(Staff staff) {
+        Optional<Staff> optionalStaff = staffRepository.findById(staff.getStaffId());
+        if (optionalStaff.isPresent())  {
+            Staff newStaff = optionalStaff.get();
+            newStaff.setFirstName(staff.getFirstName());
+            newStaff.setLastName(staff.getLastName());
+            newStaff.setBornDate(staff.getBornDate());
+            newStaff.setIdentification(staff.getIdentification());
+            newStaff.setPassword(staff.getPassword());
+            staffRepository.save(newStaff);
+            return newStaff;
+        }
+        else {
+            throw new RuntimeException("Staff with id " + staff.getStaffId() + "does not exist");
+        }
+    }
+
     public Iterable<Staff> getAllStaff()    {
         return staffRepository.findAll();
     }
@@ -47,14 +65,11 @@ public class StaffService {
         }
     }
 
-    public List<User> getUsersByStaffId(Long id)  {
+    public List<User> getUsersByStaffId(Long id) {
         Optional<Staff> optionalStaff = staffRepository.findById(id);
-        List<User> userList = new LinkedList<>();
-        if (optionalStaff.isPresent())  {
-            staffUserRepository.findAllUsersByStaff_staffId(id);
-            return null;
-        }
-        else {
+        if (optionalStaff.isPresent()) {
+            return staffUserRepository.findAllUsersByStaff(id);
+        } else {
             throw new RuntimeException("Staff with id " + id + "does not exist");
         }
     }

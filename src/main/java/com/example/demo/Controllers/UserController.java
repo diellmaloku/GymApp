@@ -30,6 +30,12 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @PutMapping("/user/{staffId}")
+    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable Long staffId)   {
+        userService.updateUser(user, staffId);
+        return ResponseEntity.ok().body(user);
+    }
+
     @GetMapping("/users")
     public ResponseEntity<Iterable<User>> getAllUsers() {
         Iterable<User> list = userService.getAllUsers();

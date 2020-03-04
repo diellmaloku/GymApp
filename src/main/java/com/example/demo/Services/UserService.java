@@ -48,6 +48,25 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public User updateUser(User user, Long staffId) {
+        Optional<Staff> optionalStaff = staffRepository.findById(staffId);
+        if (optionalStaff.isPresent()) {
+            Optional<User> optionalUser = userRepository.findById(user.getUserId());
+            User newUser = optionalUser.get();
+            newUser.setFirstName(user.getFirstName());
+            newUser.setLastName(user.getLastName());
+            newUser.setBornDate(user.getBornDate());
+            newUser.setStartDate(user.getStartDate());
+            newUser.setEndDate(user.getEndDate());
+            userRepository.save(newUser);
+            StaffUser staffUser = new StaffUser(optionalStaff.get(), newUser, new Date());
+            staffUserRepository.save(staffUser);
+            return newUser;
+        } else {
+            throw new RuntimeException("Staff with id " + staffId + " does not exist");
+        }
+    }
+
     public Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }

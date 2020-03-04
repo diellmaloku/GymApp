@@ -31,6 +31,12 @@ public class StaffController {
         return ResponseEntity.ok().build();
     }
 
+    @PutMapping("/staff")
+    public ResponseEntity<Staff> updateStaff(@RequestBody Staff staff)  {
+        staffService.updateStaff(staff);
+        return ResponseEntity.ok().body(staff);
+    }
+
     @GetMapping("/staff")
     public ResponseEntity<Iterable<Staff>> getAllStaff()    {
         Iterable<Staff> list = staffService.getAllStaff();
