@@ -2,6 +2,7 @@ package com.example.demo.Models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "Users")
 public class User {
@@ -16,6 +17,14 @@ public class User {
     private Date bornDate;
     private Date startDate;
     private Date endDate;
+
+    @ManyToMany
+    @JoinTable(
+            name = "staff_users",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "staff_id")
+    )
+    private List<Staff> staff;
 
     protected User()    {}
 

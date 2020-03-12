@@ -20,7 +20,7 @@ public class StaffController {
     }
 
     @PostMapping("/staff")
-    public ResponseEntity<Staff> createStaff(Staff staff)   {
+    public ResponseEntity<Staff> createStaff(@RequestBody Staff staff)   {
         staffService.createStaff(staff);
         return ResponseEntity.ok().body(staff);
     }

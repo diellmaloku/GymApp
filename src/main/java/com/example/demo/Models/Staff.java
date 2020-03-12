@@ -3,6 +3,7 @@ package com.example.demo.Models;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity(name = "Staff")
@@ -18,12 +19,13 @@ public class Staff {
     private int identification;
     private String password;
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "staff_user",
-//            joinColumns = {@JoinColumn(name = "staff_id", referencedColumnName = "staffId")},
-//            inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "userId")})
-//    Set<User> registeredUsers = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "staff_users",
+            joinColumns = @JoinColumn(name = "staff_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> users;
 
     protected Staff() {}
 

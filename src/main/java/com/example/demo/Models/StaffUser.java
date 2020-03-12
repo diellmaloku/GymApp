@@ -5,20 +5,22 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity(name = "StaffUser")
+@Table(name = "staff_users")
 public class StaffUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "staff_id", referencedColumnName = "staffId")
+    @ManyToOne
+    @JoinColumn(name = "staff_id")
     private Staff staff;
 
     @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(updatable = false)
     private Date createdAt;
 
     protected StaffUser()   {}
@@ -67,5 +69,10 @@ public class StaffUser {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    @PrePersist
+    protected void onCreate(){
+        this.createdAt = new Date();
     }
 }
